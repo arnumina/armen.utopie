@@ -1,0 +1,65 @@
+{{define "base"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{.Application.Name}} - {{template "title" .}}</title>
+    <link rel="icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar is-black" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                    <a class="navbar-item" href="/">
+                        <img src="/static/img/logo.png">
+                        <span class="app-name has-text-weight-semibold">{{.Application.Name}}</span>
+                    </a>
+                    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbar-data-target">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
+                <div id="navbar-data-target" class="navbar-menu">
+                    <div class="navbar-start"></div>
+                    <div class="navbar-end">
+                        <div class="navbar-item">
+                            <div class="buttons">
+                                <a class="button is-small is-light">Sign in</a>
+                                <a class="button is-small is-primary">Sign up</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <nav class="main">
+            <div class="tabs is-centered">
+                <ul>
+                    <li class="is-active"><a>Instances</a></li>
+                    <li><a>Events</a></li>
+                    <li><a>Workers</a></li>
+                    <li><a>Jobs</a></li>
+                    <li><a>Workflows</a></li>
+                    <li><a>Live</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <h1 class="title is-size-3">{{template "title" .}}</h1>
+        <section>
+            {{template "content" .}}
+        </section>
+        <footer class="is-size-7 has-text-centered">
+            <p><strong>{{.Application.Name}}</strong> v{{.Application.Version}} built at {{.Application.BuiltAt.String}}</p>
+            <p>&copy; Institut National de l'Audiovisuel</p>
+        </footer>
+    </div>
+</body>
+</html>
+{{end}}

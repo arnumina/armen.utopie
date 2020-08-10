@@ -1,0 +1,35 @@
+{{template "base" .}}
+
+{{define "title"}}Instances{{end}}
+
+{{define "content"}}
+<div class="table-container">
+    <table class="table table is-bordered is-fullwidth is-striped is-hoverable">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Host</th>
+            <th>Port</th>
+            <th>Started At</th>
+            <th>Uptime</th>
+        </tr>
+        </thead>
+        <tbody>
+            {{$appID := .Application.ID}}
+            {{range .Instances}}
+            <tr>
+                {{if eq .ID $appID}}
+                    <td>{{.ID}}</td>
+                {{else}}
+                    <td><a href="http://{{.Host}}:{{.Port}}/">{{.ID}}</a></td>
+                {{end}}
+                <td>{{.Host}}</td>
+                <td>{{.Port}}</td>
+                <td>{{.StartedAt.String}}</td>
+                <td>{{.Uptime}}</td>
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
+</div>
+{{end}}

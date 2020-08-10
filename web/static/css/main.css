@@ -1,0 +1,35 @@
+.tabs a {
+    border-bottom-width: 3px;
+}
+
+.tabs ul, .tabs li a {
+    border-bottom-color: #fafbfc;
+}
+
+.tabs li.is-active a {
+    border-bottom-color: #f9826c;
+}
+
+header {
+    background-color: black;
+}
+
+span.app-name {
+    padding-left: 10px;
+}
+
+nav.main {
+    background-color: #fafbfc;
+    margin-bottom: 3vh;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+.title {
+    margin-bottom: 1vh;
+}
+
+footer {
+    margin-top: 3vh;
+    padding-top: 1vh;
+    border-top: 1px solid #dbdbdb;
+}
