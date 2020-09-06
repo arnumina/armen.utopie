@@ -12,17 +12,17 @@
 package web
 
 import (
-	"html/template"
 	"net/http"
 
 	"github.com/arnumina/armen.core/pkg/model"
 	"github.com/arnumina/logger"
 
+	"github.com/arnumina/armen.utopie/data"
 	"github.com/arnumina/armen.utopie/internal/pkg/container"
 )
 
 type (
-	templateData struct {
+	tData struct {
 		Application container.Application
 		Instances   []*model.Instance
 	}
@@ -49,7 +49,7 @@ func (w *Web) Build(ctn container.Container) *Web {
 	router := ctn.Server().Router()
 
 	router.HandleFunc("/", w.home).Methods("GET")
-	router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./web/static"))))
+	router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(data.Static)))
 
 	return w
 }
@@ -70,17 +70,15 @@ func (w *Web) instances(rw http.ResponseWriter, _ *http.Request) {
 		return
 	}
 
-	td := &templateData{
+	td := &tData{
 		Application: w.application,
 		Instances:   ais,
 	}
 
-	files := []string{
-		"./web/html/page.instances.html",
-		"./web/html/layout.base.html",
-	}
-
-	t, err := template.ParseFiles(files...)
+	t, err := parseTemplates(
+		"html/page.instances.html",
+		"html/layout.base.html",
+	)
 	if err != nil {
 		w.serverError(rw, err)
 		return
